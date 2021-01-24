@@ -63,7 +63,7 @@ print('<html>')
 from subprocess import run
 for filename in os.listdir(directory):
 	if filename.endswith(".png"):
-		run(["C:\\Program Files\\MongoDB\\Server\\4.2\\bin\\mongofiles.exe", "-d", db, "-l", os.path.join(directory, filename), "put", filename])
+		run(["\\usr\\bin", "-d", db, "-l", os.path.join(directory, filename), "put", filename]) #C:\\Program Files\\MongoDB\\Server\\4.2\\bin\\mongofiles.exe
 		#print('uploaded <br>')
 
 mydb = myclient[db]
