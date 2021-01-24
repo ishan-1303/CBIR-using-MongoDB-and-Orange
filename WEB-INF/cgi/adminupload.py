@@ -50,7 +50,7 @@ def uploadImages():
 					current_img.save(di + 'y' + str(iid) + '.png', 'PNG')
 					newfile.append('y' + str(iid) + '.png')
 					ids.append(str(iid))
-					copyfile(di + 'y' + str(iid) + '.png', os.getcwd() + '\\..\\..\\domestic-animals\\y' + str(iid) + '.png')
+					copyfile(di + 'y' + str(iid) + '.png', os.getcwd() + '\\..\\..\\photos\\y' + str(iid) + '.png')
 					i = i + 1
 					os.remove(di + fn)
 			
