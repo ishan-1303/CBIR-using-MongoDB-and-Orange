@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>MI-Learning</title>
+  <!-- CSS file for framework only. Not for content -->
+  <link rel="stylesheet" type="text/css" href="browser.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script type="text/javascript">
+    function submitForm() {
+
+      var search = document.getElementById('textAreaSqlInput');
+      var image = document.getElementById('imageBox');
+      var imgName= image.value;
+      
+      localStorage.setItem('imgName',imgName)
+      	if (search.value != "") {
+        	document.getElementById("searchForm").action = "cgi-bin/search.py";
+        	document.getElementById("searchForm").submit();
+        	myFunction1();
+	    } else if (image.value != "") {
+	      document.getElementById("searchForm").action = "cgi-bin/output.py";
+	      document.getElementById("searchForm").submit();
+	      myFunction();     	
+	    }
+	    else {
+        document.getElementById('err').innerHTML = "Please type keyword or select a image file";
+      	} 
+      }
+$(function () {
+    $(":file").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
+function imageIsLoaded(e) {
+    $('#myImg').attr('src', e.target.result);
+    
+    $('#animated-gif').attr('src', e.target.result);
+    document.getElementById("myImg").style.display="block";
+    document.getElementById("myImg").style="border: 1px solid #ddd;border-radius: 4px;padding: 5px; width: 100px; ";
+    var a = document.getElementById("myImg").src;
+    localStorage.setItem('ImgPath',a);
+};
+      
+  </script>
+</head>
+
+<body>
+  <div id="wapper">
+    <div id="header">
+      <h1 id="headline">Lab DB</h1>
+      <!-- horizontal menu -->
+      <nav id="nav_main">
+        <a href="/SQLTool/index.html">SQL Tool</a>
+        <a href="index.html" class="currentPage">Image Database</a>
+
+      </nav>
+      <div id="logoHSO">
+        <a href="http://www.hs-offenburg.de" target="_blank"><img src="bilder/logoHSO.gif" alt="Hochschule Offenburg"></a>
+      </div>
+      <img src="bilder/line_top.png" id="line_top">
+    </div>
+    <img id="hand" src="bilder/hand.png">
+    <!-- vertical menu -->
+    <div id="nav_left">
+      <div id="menuItem">
+        <a href="index.html" class="currentPage">Image Search</a><br>
+        <a href="Help/index.html">Help</a><br>
+        <a href="Developers/index.html">Developers</a><br>
+        <a href="Project Supervisor/index.html">Project Supervisor</a><br>
+        <a href="Admin Login/index.html">Admin Login</a>
+      </div>
+      <!-- menuItem -->
+
+    </div>
+    <!-- nav_left -->
+    <div id="content">
+      <!-- Load html page in the content area -->
+      <h2 class="margin-left-50" style="font-size: 20px">Content based Image Retrieval</h2>
+      <div class="margin-left-50" style="margin-top:125px;">
+        
+        <div class="margin-left-50" style="text-align: center;">
+          <form enctype="multipart/form-data" id="searchForm" method="post">
+          	<h3 style="padding-bottom: 5px; font-size: 25px;">Image Search</h3>
+            <input name="searchBox" class="" id="textAreaSqlInput" rows="4" style="width: 50%; height: 28px;align-self: center" placeholder="Image Search"></input><br>
+
+            <input type="file" name="file" style="position:absolute; margin-left: -170px;  margin-top:10px" accept="image/*" id="imageBox">
+
+            <img src="bilder/Search.png" title="Search Similar Images" class="pointer" onclick="submitForm()" style="position:absolute; margin-left:85px; margin-top:10px">
+           <br><br>
+
+           <p id="err" style="color: red;"></p>
+           <img id="myImg" src="#" style="display: none;" />
+
+            <div id="myDIV" >
+     <!--        	<h4>Advanced Search</h4> -->
+            	<h5><label for="features_algo">Feature algorithm : </label>
+  					<select name="features_algo" id="features_algo">
+  						<option value="inception-v3">Inception-V3</option>
+  					  <option value="vgg16">Vgg-16</option>
+  				 	  <option value="vgg19">Vgg-19</option>
+ 				    </select></h5>
+ 				    <h5><labelfor="distance_algo">Distance algorithm : </label></labelfor="distance_algo">
+				 	<label class="radio-inline">
+				      <input type="radio" name="distance_algo" value="Euclidean" >Euclidean
+				    </label>
+				    <label class="radio-inline">
+				      <input type="radio" name="distance_algo" value="Cosine" checked="">Cosine
+				    </label></h5>
+              <div>
+                <h5>Drag the slider to set number of clusters.</h5>
+                <div class="slidecontainer">
+                  <input name="slider" type="range" min="2" max="350" value="300" class="slider" id="myRange">
+                  <h4>Number of Clusters: <span id="demo"></span></h4>
+                </div>
+              </div>
+            </div>
+          </form>
+          	<div>
+          		<center><img src="#" width="250px" height="200px" style="display: none;margin-left:-50px;" id="animated-gif"/></center>
+          		<center><img src="bilder/831.gif" width="450px" height="300px" style="display: none;margin-left:-50px;" id="annotation-gif"/></center>
+          <br>
+          <h3 style="margin-left:-50px" id="demo1"></h3>
+      		</div>
+        </div>
+      </div>
+
+    </div>
+    <footer>
+      <img src="bilder/line_bottom.png" id="line_bottom">
+      <p id="nameProf">Prof. Dr. Volker Sänger, <a id="mail" href="mailto:volker.saenger@hs-offenburg.de">volker.saenger@hs-offenburg.de</a>
+      </p>
+    </footer>
+  </div>
+  <script>
+			var slider = document.getElementById("myRange");
+			var output = document.getElementById("demo");
+			output.innerHTML = slider.value;
+			slider.oninput = function() {
+			  output.innerHTML = this.value;
+			}
+</script>
+<script>
+function myFunction() {
+  var y = document.getElementById("searchForm");
+  y.style.display = "none";
+
+  document.getElementById("animated-gif").style.display = "block";
+  				var i = 0;
+				var txt = 'Searching for Similar Images ......';
+				var speed = 200;
+				typeWriter();
+					function typeWriter() {
+					  if (i < txt.length) {
+					    document.getElementById("demo1").innerHTML += txt.charAt(i);
+					    i++;
+					    setTimeout(typeWriter, speed);
+					  }else{
+					  	i=0;
+					  	document.getElementById("demo1").innerHTML = "";
+
+					  	typeWriter();
+					  }
+					}
+}
+
+function myFunction1() {
+	var y = document.getElementById("searchForm");
+  	y.style.display = "none";
+  	document.getElementById("annotation-gif").style.display = "block";
+
+}
+</script>
+</body>
+<!-- Piwik -->
+<!-- End Piwik Code -->
+
+<!-- Piwik Image Tracker-->
+<img src="https://webanalyse.hs-offenburg.de/piwik.php?idsite=11&rec=1" style="border:0" alt="" />
+<!-- End Piwik -->
+</html>

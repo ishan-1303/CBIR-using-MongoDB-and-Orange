@@ -1,0 +1,50 @@
+<div class="margin-left-50">
+	<h2>
+		Search using photo
+	</h2>
+	<div class="row">
+		<div class="col-6">
+			<p>
+				Ein einfacher Befehl könnte zum Beispiel so aussehen
+				<img src="../bilder/SQL/eingebeberiech2.png" width="100%" class="center2">
+			</p>
+			<p>	
+				Die Antwort dieser SQL-Abfrage sieht dem zufolge so aus:<br><br>
+				<img src="../bilder/SQL/ausgabebereich.PNG" width="95%" class="center2">  
+			</p>
+		</div>
+		<div class="col-6">
+			<p>
+			Das ist auch der Befehl, um die gesamte Assistententabelle zu sehen.
+			Wenn wir zum Beispiel nur noch Attribut PersonalNr sehen wollten und name, fachgebiet und boss verschwinden lassen, dann müssten man das "*" durch ein "personalNr" ersetzen. </br>
+			-> weniger Spalten </br>
+			Wenn wir die Einträge reduzieren wollen, dann werden Bedingungen(z.b where) eingebaut. Nur Einträge, die X erfüllen, sollen erscheinen. </br>
+			-> weniger Zeilen/Datensätze </br>
+			
+			Zeig mir <strong> personalNR, name und Fachgebiet </strong>  an von der Tabelle <b>Assistent</b>. Zeig mir nur Zeilen an, die die personalNR= 3001 haben: </br>
+			<img src="../bilder/SQL/eingabewherepers.png" width="100%" class="center2">
+			
+			</p>
+		</div>
+	</div>
+
+	<div id="arrow">
+        <p id="pagequiz">
+            2/3
+        </p>
+	    <img src="../bilder/all.png" usemap="#navigation">
+	    <map name="navigation">
+	        <area shape="rect" coords="0, 42, 39, 83" onclick="back()">
+	        <area shape="rect" coords="60, 35, 118, 88" onclick="next()">
+	    </map>
+	</div>
+
+	<script type="text/javascript">
+		function next() {
+			$('#content').load("seite3.html");
+		}
+		function back() {
+			$('#content').load("seite1.html");
+		}
+	</script>
+</div>

@@ -1,0 +1,22 @@
+img {
+  width: 100%;
+  height: auto;
+}
+
+.icon-style{
+  margin:5px 5px;
+  color: #1E3287;
+}
+
+.icon-style:hover{
+  color: #9B9187;
+}
+
+.icon-info {
+  margin-left: 30px;
+  padding-top: 10px;
+}
+
+.name{
+  margin-top: -25px;
+}

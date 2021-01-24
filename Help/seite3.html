@@ -1,0 +1,53 @@
+<div class="margin-left-50">
+    <h2>
+        Algorithm descriptions
+    </h2>
+  <div class="row">
+        <div class="col-6">
+                <h3>Inception-v3</h3>
+                <ul style="list-style-type:disc">
+                        <li>Inception-v3 is a pre-trained convolutional neural network model that is 48 layers deep</li><br>
+                        <li>It is a widely-used image recognition model that has been shown to attain greater than 78.1% accuracy on the ImageNet dataset and around 93.9% accuracy in top 5 results.</li><br>
+                        <li>The model is the culmination of many ideas introduced by multiple researchers over the past years.</li><br>
+                        <li>Inception-v3 is the open source algorithm made by Google and used for objects classification.</li><br>
+                        <li>It is a rethinking for the initial structure of computer vision after Inception-v1, Inception-v2  in 2015.</li><br>
+                </ul>
+                </div>
+        <div class="col-6">
+            <p>
+            Das ist auch der Befehl, um die gesamte Assistententabelle zu sehen.
+            Wenn wir zum Beispiel nur noch Attribut PersonalNr sehen wollten und name, fachgebiet und boss verschwinden lassen, dann müssten man das "*" durch ein "personalNr" ersetzen. </br>
+            -> weniger Spalten </br>
+            Wenn wir die Einträge reduzieren wollen, dann werden Bedingungen(z.b where) eingebaut. Nur Einträge, die X erfüllen, sollen erscheinen. </br>
+            -> weniger Zeilen/Datensätze </br>
+            
+            Zeig mir <strong> personalNR, name und Fachgebiet </strong>  an von der Tabelle <b>Assistent</b>. Zeig mir nur Zeilen an, die die personalNR= 3001 haben: </br>
+            
+            </p>
+        </div>
+          
+  <div class="col-12">
+            <img src="../bilder/inception-v3.jfif" width="100%" class="center2">
+        </div>  
+    </div>
+
+    <div id="arrow">
+        <p id="pagequiz">
+            3/3
+        </p>
+        <img src="../bilder/all_begin.png" usemap="#navigation">
+        <map name="navigation">
+            <area shape="rect" coords="0, 42, 39, 83" onclick="back()">
+            <area shape="rect" coords="60, 35, 118, 88" onclick="next()">
+        </map>
+    </div>
+
+    <script type="text/javascript">
+        function next() {
+            $('#content').load("seite1.html");
+        }
+        function back() {
+            $('#content').load("seite2.html");
+        }
+    </script>
+</div>
