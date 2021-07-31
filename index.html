@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>MI-Learning</title>
+  <title>Anwendungen im Databanklabor</title>
   <!-- CSS file for framework only. Not for content -->
   <link rel="stylesheet" type="text/css" href="browser.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
@@ -30,7 +30,7 @@
 	      myFunction();     	
 	    }
 	    else {
-        document.getElementById('err').innerHTML = "Please type keyword or select a image file";
+        document.getElementById('err').innerHTML = "Please type keyword or select an image file";
       	} 
       }
 $(function () {
@@ -78,7 +78,7 @@ function imageIsLoaded(e) {
         <a href="index.html" class="currentPage">Image Search</a><br>
         <a href="Help/index.html">Help</a><br>
         <a href="Developers/index.html">Developers</a><br>
-        <a href="Project Supervisor/index.html">Project Supervisor</a><br>
+        
         <a href="Admin Login/index.html">Admin Login</a>
       </div>
       <!-- menuItem -->
@@ -87,21 +87,27 @@ function imageIsLoaded(e) {
     <!-- nav_left -->
     <div id="content">
       <!-- Load html page in the content area -->
-      <h2 class="margin-left-50" style="font-size: 20px">Content based Image Retrieval</h2>
-      <div class="margin-left-50" style="margin-top:125px;">
+      <h2 class="margin-left-50" style="font-size: 20px">Content Based Image Retrieval</h2>
+      <div class="margin-left-50" style="margin-top:125px; text-align: center;">
         
-        <div class="margin-left-50" style="text-align: center;">
+        <div class="margin-left-50" >
           <form enctype="multipart/form-data" id="searchForm" method="post">
           	<h3 style="padding-bottom: 5px; font-size: 25px;">Image Search</h3>
             <input name="searchBox" class="" id="textAreaSqlInput" rows="4" style="width: 50%; height: 28px;align-self: center" placeholder="Image Search"></input><br>
 
-            <input type="file" name="file" style="position:absolute; margin-left: -170px;  margin-top:10px" accept="image/*" id="imageBox">
+            <input type="file" name="file" style="position:absolute; margin-left: -170px;  margin-top:10px" accept="image/*" id="imageBox"> 
+            <!-- <div class="image-upload">
+                <label for="imageBox">
+                <img src="bilder/Search.png" style="position:absolute; margin-left: -170px;  margin-top:10px"/>
+                </label>
+                <input id="imageBox" type="file" name="file" accept="image/*" style="position:absolute; margin-left: -170px;  margin-top:10px "/>
+                </div> -->
 
             <img src="bilder/Search.png" title="Search Similar Images" class="pointer" onclick="submitForm()" style="position:absolute; margin-left:85px; margin-top:10px">
            <br><br>
 
            <p id="err" style="color: red;"></p>
-           <img id="myImg" src="#" style="display: none;" />
+           <img id="myImg" src="#" width="50px" height="50px" style="display: none; " />
 
             <div id="myDIV" >
      <!--        	<h4>Advanced Search</h4> -->
@@ -152,6 +158,8 @@ function imageIsLoaded(e) {
 			}
 </script>
 <script>
+  
+  // For loading Screen 
 function myFunction() {
   var y = document.getElementById("searchForm");
   y.style.display = "none";

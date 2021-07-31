@@ -1,32 +1,31 @@
 import Orange
 import os
-# importing images
 from orangecontrib.imageanalytics.import_images import ImportImages
 
-import time
-#import adminupload
 import pymongo
 import featurestodb
 
-t0= time.clock()
 db = featurestodb.db
+port = featurestodb.port
 
 import_images = ImportImages()
 
-embeddings1 = []
-embeddings2 = []
-embeddings3 = []
+#three embedding (features) arrays
+embeddings1 = []	#Inception-v3 features
+embeddings2 = []	#vgg16Features
+embeddings3 = []	#vgg19Features
+
+
+# importing images
 import_images = ImportImages()
-path = os.getcwd() + "\\..\\..\\uploaded"
+path = os.getcwd() + "/../../uploaded"
 data, err = import_images(path)    
-
-#print(data)
 
 # defining image path to pass to embedding
 print(len(data))
 image_file_paths = [None] * len(data)
 for i in range(len(data)):
-    image_file_paths[i] = path + "\\" +  str(data[i,'image'])
+    image_file_paths[i] = path + "/" +  str(data[i,'image'])
 
 # extracting features from images (embedding)
 from orangecontrib.imageanalytics.image_embedder import ImageEmbedder
@@ -42,12 +41,13 @@ with ImageEmbedder(model='vgg19') as emb:
 
 
 q = {}
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://localhost/")
 mydb = myclient[db]
 mycol = mydb["fs.files"]
 
 
 i = 0
+#retrieving embeddings from database
 for y in featurestodb.newfile:
 	myquery = {"filename": y}
 
@@ -67,11 +67,15 @@ for y in featurestodb.newfile:
 import os, shutil
 import glob
 
+#removing uploaded image and annotation file
 files = glob.glob(path + '/*.png')
 
 for f in files:
     os.remove(f)
+
+
+files = glob.glob(path + 'annotations/*.txt')
+for f in files:
+    os.remove(f)
     
-t1 = time.clock() - t0
-print("Time elapsed: ", t1)
-print('<br><a href="../Admin Upload/seite1.html"> Add more images </a>')
+print('<br><a href="../Admin Login/seite1.html"> Add more images </a>')

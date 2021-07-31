@@ -255,7 +255,7 @@
   margin-left: 176px;
   padding: 10px 0;
   text-align: center;
-  background-color: lightblue;
+  background-color: #EFEFEF;
   font-family: Arial;
 }
 
@@ -370,4 +370,8 @@ background-color: #9B9187;
 
 .outerbox{
 	display: inline-block;
+}
+
+.image-upload>input {
+  display: none;
 }

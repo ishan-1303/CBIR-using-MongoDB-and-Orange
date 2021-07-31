@@ -2,9 +2,9 @@ import pymongo
 import cgi
 import os
 		
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://localhost/")
 
-
+#to retrieve annotations for particular image in database
 def getDescription(db, filename):
 	mydb = myclient[db]
 	mycol = mydb["fs.files"]

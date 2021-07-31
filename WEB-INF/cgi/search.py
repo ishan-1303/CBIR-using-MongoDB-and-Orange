@@ -2,40 +2,36 @@ import pymongo
 import cgi
 import os
 import socket
+from timeit import default_timer as timer
 
-import time
-t0= time.clock()
-		
-
+start = timer()		
 form = cgi.FieldStorage()
-searchterm =  form.getvalue('searchBox')
+searchterm =  form.getvalue('searchBox') #getting the value posted by form(search by annotation)
+
+#database to be used
 db = "ImageDB"
+port = "27018"
 
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://localhost/")
 mydb = myclient[db]
 mycol = mydb["fs.files"]
 
 
 
 myquery = {"$text": {"$search": searchterm}}
-#mydoc = mycol.distinct('filename')
 mydoc = mycol.find(myquery)
-i = 0;
-
-t1 = time.clock() - t0
+i = 0
 
 
+
+#html code for displaying output
 print('Content-type:text/html\n\n')
-
-
-
-print('<!DOCTYPE html>')
 print('<html>')
 
 print('<head>')
 print('<meta charset="utf-8">')
-print('<title>MI-Learning</title>')
+print('<title>Anwendungen im Databanklabor</title>')
 
 print('<link rel="stylesheet" type="text/css" href="../browser.css">')
 print('<link rel="stylesheet" type="text/css" href="../styles.css">')
@@ -73,7 +69,6 @@ print('<div id="menuItem">')
 print('<a href="../index.html"class="currentPage">Image Search</a><br>')
 print('<a href="../Help/index.html">Help</a><br>')
 print('<a href="../Developers/index.html">Developers</a><br>')
-print('<a href="../Project Supervisor/index.html">Project Supervisor</a><br>')
 print('<a href="../Admin Login/index.html">Admin Login</a>')
 print('</div>')
 
@@ -81,17 +76,14 @@ print('</div>')
 
 print('<div id="content">')
 
-print('<h2 class="margin-left-50" style="font-size: 20px;">Content based Image Retrieval</h2>')
+print('<h2 class="margin-left-50" style="font-size: 20px;">Content Based Image Retrieval</h2>')
 print('<div class="margin-left-50" style="margin-left: 100px">')
-
-# print(db)
-t1 = time.clock() - t0
-t1 = str(round(t1,2))
-# print('<h5>Image Name: <span id="imgName"></span></h5>')
-#print('<input type="button" class="pointer btns" onclick="submitForm()" value="New Search" style="margin-left:450px; margin-top:-125px;">')
-print('<h4>' + str(mydoc.count()) + ' results for ' + searchterm + ' in ' + str(t1) + ' seconds <a href="../index.html">Back to Search</a></h4>')
+end = timer()
+t1 = end - start 
+print('<h4>' + str(mydoc.count()) + ' results for ' + searchterm + ' in ' + str(round(t1, 2)) + ' seconds <a href="../index.html">Back to Search</a></h4>')
 print('</div>')
 print('<div id="result" class="margin-left-50 scrollbar" style="margin-left: 100px; height:450px">')
+#displaying the images which contains the searched keyword
 from subprocess import run
 for x in mydoc:
 	filename = os.path.basename(x["filename"])
@@ -110,6 +102,4 @@ print('</body>')
 print('<img src="https://webanalyse.hs-offenburg.de/piwik.php?idsite=11&rec=1" style="border:0" alt="" />')
 print('</html>')
          
-
-# os.remove('C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/proui/photos/zzzzzzz.png')
 
